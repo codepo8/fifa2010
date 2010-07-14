@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Basic Sliders</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.1.1/build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+
+<style type="text/css">
+    #demo input {
+        width: 2em;
+    }
+    .horiz_slider {
+        margin-left: 1ex;
+    }
+    .vert_slider {
+        margin-bottom: 1em;
+    }
+    button.active{background:red;}
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class="yui3-skin-sam  yui-skin-sam">
+
+<div id="demo">
+
+    <h2>Information to display</h2>
+    <ul id="buttons">
+      <li><button id="time" class="active">Time on Pitch</button></li>
+      <li><button id="shots">Shots</button></li>
+      <li><button id="passes">Passes</button></li>
+      <li><button id="tackles">Tackles</button></li>
+      <li><button id="saves">Saves</button></li>
+    </ul>
+    <p><span class="digit">0</span><span id="slider"></span><span class="digit" id="maxval">0</span></p>
+    <div id="names"></div>
+</div>
+<script src="fifa2010.js"></script>
+<script type="text/javascript">
+// Create a YUI instance and request the slider module and its dependencies
+YUI().use("slider", function (Y) {
+var current = 'time';
+var data = fifa.data.query.results.row;
+var all = data.length;
+var maxval={time:0,shots:0,passes:0,tackles:0,saves:0};
+for(var i=1;i<all;i++){
+  if(+data[i].time > maxval.time){maxval.time = +data[i].time;}
+  if(+data[i].shots > maxval.shots){maxval.shots = +data[i].shots;}
+  if(+data[i].passes > maxval.passes){maxval.passes = +data[i].passes;}
+  if(+data[i].tackles > maxval.tackles){maxval.tackles = +data[i].tackles;}
+  if(+data[i].saves > maxval.saves){maxval.saves = +data[i].saves;}
+}
+Y.one('#buttons').delegate('click',function(e){
+  var id = this.get('id');
+  current = id;
+  addNames(maxval[id]);
+  createSlider(maxval[id]);
+},'button');
+
+// Function to update the input value from the Slider value
+function updateInput( e ) {
+    addNames(e.newVal);
+}    
+function addNames(val){
+  var names = '';
+  for(var i=0;i<all;i++){
+    if(+data[i][current] >= val){
+      names+= '<li>'+data[i].surname+' ('+data[i].position+', '+data[i].team+')</li>';
+    }
+  }
+  Y.one('#names').set('innerHTML','<ul>'+names+'</ul>');
+  
+}
+createSlider(maxval.time);
+function createSlider(maxval){
+  addNames(maxval);
+  Y.one('#maxval').set('innerHTML',maxval);
+  Y.one('#slider').set('innerHTML','');
+  var xSlider = new Y.Slider({
+      length : 300,
+      min    : 0,
+      max    : maxval,
+      value : maxval
+  });
+  xSlider.after( "valueChange", updateInput);
+  xSlider.render('#slider')
+}
+
+
+
+
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+
+</body>
+</html>

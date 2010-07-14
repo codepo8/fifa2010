@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+  <title>Interactive analysis of the FIFA 2010 Worldcup data</title>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0/build/reset-fonts-grids/reset-fonts-grids.css&2.8.0/build/base/base-min.css">
+  <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.1.1/build/cssfonts/fonts-min.css" />
+  <link type="text/css" rel="stylesheet" href="fifa.css" />
+  <script type="text/javascript" src="http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam  yui-skin-sam">
+<div id="doc2" class="yui-t7">
+
+  <div id="hd" role="banner">
+    <h1>FIFA 2010 Worldcup data</h1>
+  </div>
+  <div id="bd" role="main">
+    <p>This is a quickly put together interface to see the data of the FIFA 2010 World Cup as <a href="http://www.guardian.co.uk/news/datablog/2010/jul/09/world-cup-2010-statistics">provided by the Guardian Newspaper</a>.</p>
+    
+    <h2>Use the slider to filter all the players by numbers</h2>
+    <ul id="buttons">
+      <li><button id="time" class="on">Time on Pitch</button></li>
+      <li><button id="shots">Shots</button></li>
+      <li><button id="passes">Passes</button></li>
+      <li><button id="tackles">Tackles</button></li>
+      <li><button id="saves">Saves</button></li>
+      <li><span class="digit">0</span><span id="slider"></span><span  class="digit" id="current"></span> of <span class="digit" id="maxval">0</span></li>
+    </ul>
+    <div id="slidenames"></div>
+    
+    <h2>Filter by country and position</h2>
+
+    <p>Or click any of the country names to see the teams or the positions to see all players with that position. Remove results by clicking the delete buttons.</p>
+    <p>Get player details by clicking their names, hide it by clicking again.</p>
+    <div id="fifa"></div>
+  </div>
+  
+  
+  <div id="ft" role="contentinfo">
+    <p>Written by <a href="http://wait-till-i.com">Christian Heilmann</a> using <a href="http://developer.yahoo.com/yql">YQL</a> and <a href="http://developer.yahoo.com/yui">YUI</a>.</p>
+  </div>
+
+</div>
+<script src="fifa2010.js"></script>
+<script src="actions.js"></script>
+</body>
+</html>
