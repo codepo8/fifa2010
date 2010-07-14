@@ -1,0 +1,7 @@
+This is a neat little interface to play with the World Cup statistics released by the Guardian:
+http://www.guardian.co.uk/news/datablog/2010/jul/09/world-cup-2010-statistics
+
+It used YQL (http://developer.yahoo.com) to convert the data and YUI (http://developer.yahoo.com/yui) 
+for the layout and functionality.
+
+Nothing amazing, but fun to do :)
